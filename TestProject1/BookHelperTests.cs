@@ -39,6 +39,31 @@ namespace LibraryTest
         }
 
         [TestMethod]
+        public void GetNumberOfBooks()
+        {
+            BookHelper bookHelper = new BookHelper(DataGenerator.MockBooks());
+
+            string booksByName = bookHelper.GetNumberOfBooks("Ion");
+
+            Assert.AreEqual(booksByName, "We have 1 copies of which 0 are available");
+
+            string bookByISBN = bookHelper.GetNumberOfBooks(0923644768);
+
+            Assert.AreEqual(bookByISBN, "We have 1 copies of which 0 are available");
+        }
+
+        [TestMethod]
+        public void GetDistinctBooks()
+        {
+            BookHelper bookHelper = new BookHelper(DataGenerator.MockBooks());
+
+            string books = bookHelper.GetDistinctBooks();
+            string expected = "Books:" + System.Environment.NewLine + "Ursul pacalit de vulpe" + System.Environment.NewLine + "Ion" + System.Environment.NewLine;
+
+            Assert.AreEqual(books, expected);
+        }
+
+        [TestMethod]
         public void AddBook()
         {
             BookHelper bookHelper = new BookHelper(DataGenerator.MockBooks());

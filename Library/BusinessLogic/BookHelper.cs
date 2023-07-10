@@ -34,6 +34,34 @@ namespace LibraryManagement.BusinessLogic
             return ReturnMessage(book);
         }
 
+        public string GetNumberOfBooks(string name)
+        {
+            int allBooks = this.books.Where(b => b.Name.ToLower() == name.ToLower()).Count();
+            int availableBooks = this.books.Where(b => b.Name.ToLower() == name.ToLower() && b.Available).Count();
+
+            return $"We have {allBooks} copies of which {availableBooks} are available";
+        }
+
+        public string GetNumberOfBooks(long ISBN)
+        {
+            int allBooks = this.books.ToList().Where(b => b.ISBN == ISBN).Count();
+            int availableBooks = this.books.ToList().Where(b => b.ISBN == ISBN && b.Available).Count();
+
+            return $"We have {allBooks} copies of which {availableBooks} are available";
+        }
+
+        public string GetDistinctBooks()
+        {
+            List<IBook> books = this.books.GroupBy(x => x.ISBN).Select(group => group.First()).ToList();
+
+            string message = "Books:" + System.Environment.NewLine;
+
+            foreach (var book in books)
+                message = message + $"{book.Name}" + System.Environment.NewLine;
+
+            return message;
+        }
+
         public string AddBook(IBook book)
         {
             List<IBook> books = this.books.ToList();

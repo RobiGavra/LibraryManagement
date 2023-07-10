@@ -59,6 +59,17 @@ namespace LibraryTest
         }
 
         [TestMethod]
+        public void GetOverduerentals()
+        {
+            RentalHelper rentalHelper = new RentalHelper(DataGenerator.MockUsers(), DataGenerator.MockBooks(), DataGenerator.MockRentals());
+
+            string books = rentalHelper.GetOverduerentals(new DateTime(2023, 10, 20));
+            string expected = "Overduerentals:" + System.Environment.NewLine + "Ursul pacalit de vulpe" + System.Environment.NewLine + "Ion" + System.Environment.NewLine;
+
+            Assert.AreEqual(books, expected);
+        }
+
+        [TestMethod]
         public void ReturnBook()
         {
             IBook[] books = DataGenerator.MockBooks();

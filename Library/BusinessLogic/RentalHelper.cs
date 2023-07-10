@@ -40,17 +40,29 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetPrice(int bookId, int userId, DateTime currentDate)
         {
-            IBook book = books.SingleOrDefault(b => b.Id == bookId);
+            IBook book = this.books.SingleOrDefault(b => b.Id == bookId);
 
             if (book == null)
                 return "book not found in system";
 
-            IRental rental = rentals.SingleOrDefault(r => r.Book.Id == bookId && r.User.Id == userId && !r.BookReturned);
+            IRental rental = this.rentals.SingleOrDefault(r => r.Book.Id == bookId && r.User.Id == userId && !r.BookReturned);
 
             if (rental == null)
                 return "rental not found in system";
 
             return $"You need to pay {rental.GetFullPrice(currentDate)}, of which the penalties are {rental.GetPenalty(currentDate)}";
+        }
+
+        public string GetOverduerentals(DateTime currentDate)
+        {
+            List<IRental> rentals = this.rentals.Where(r => currentDate > r.ReturnDate && !r.BookReturned).ToList();
+
+            string message = "Overduerentals:" + System.Environment.NewLine;
+
+            foreach (var rental in rentals)
+                message = message + $"{rental.Book.Name}" + System.Environment.NewLine;
+
+            return message;
         }
 
         public string ReturnBook(int bookId, int userId)
