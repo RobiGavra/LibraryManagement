@@ -3,7 +3,7 @@ using System;
 
 namespace LibraryTest
 {
-    public static class DataGenerator
+    public static class DataMock
     {
         public static User[] MockUsers()
         {

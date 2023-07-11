@@ -13,7 +13,7 @@ namespace LibraryTest
         [TestMethod]
         public void Rent()
         {
-            RentalHelper rentalHelper = new RentalHelper(DataGenerator.MockUsers(), DataGenerator.MockBooks(), DataGenerator.MockRentals());
+            RentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), DataMock.MockBooks(), DataMock.MockRentals());
 
             IRental rental = new Rental()
             {
@@ -36,7 +36,7 @@ namespace LibraryTest
         [TestMethod]
         public void GetPrice()
         {
-            RentalHelper rentalHelper = new RentalHelper(DataGenerator.MockUsers(), DataGenerator.MockBooks(), DataGenerator.MockRentals());
+            RentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), DataMock.MockBooks(), DataMock.MockRentals());
             DateTime returnDate = new DateTime(2023, 03, 01).AddDays(14);
             DateTime currentDate = new DateTime(2023, 03, 20);
 
@@ -61,10 +61,10 @@ namespace LibraryTest
         [TestMethod]
         public void GetOverduerentals()
         {
-            RentalHelper rentalHelper = new RentalHelper(DataGenerator.MockUsers(), DataGenerator.MockBooks(), DataGenerator.MockRentals());
+            RentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), DataMock.MockBooks(), DataMock.MockRentals());
 
             string books = rentalHelper.GetOverduerentals(new DateTime(2023, 10, 20));
-            string expected = "Overduerentals:" + System.Environment.NewLine + "Ursul pacalit de vulpe" + System.Environment.NewLine + "Ion" + System.Environment.NewLine;
+            string expected = "Overduerentals:" + Environment.NewLine + "Ursul pacalit de vulpe" + Environment.NewLine + "Ion" + Environment.NewLine;
 
             Assert.AreEqual(books, expected);
         }
@@ -72,10 +72,10 @@ namespace LibraryTest
         [TestMethod]
         public void ReturnBook()
         {
-            IBook[] books = DataGenerator.MockBooks();
-            IRental[] rentals = DataGenerator.MockRentals();
+            IBook[] books = DataMock.MockBooks();
+            IRental[] rentals = DataMock.MockRentals();
 
-            RentalHelper rentalHelper = new RentalHelper(DataGenerator.MockUsers(), books, rentals);
+            RentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), books, rentals);
 
             bool bookAvailable = books.First(b => b.Id == 2).Available;
             bool rentalBookReturned = rentals.First(r => r.Book.Id == 2 && r.User.Id == 2).BookReturned;

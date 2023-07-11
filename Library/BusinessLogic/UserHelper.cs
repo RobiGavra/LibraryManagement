@@ -15,14 +15,14 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetUser(string fullName)
         {
-            IUser user = this.users.ToList().Find(u => u.FullName.ToLower().Contains(fullName.ToLower()));
+            IUser user = this.users.FirstOrDefault(u => u.FullName.ToLower().Contains(fullName.ToLower()));
 
             return ReturnMessage(user);
         }
 
         public string GetUser(int Id)
         {
-            IUser user = this.users.ToList().Find(u => u.Id == Id);
+            IUser user = this.users.FirstOrDefault(u => u.Id == Id);
 
             return ReturnMessage(user);
         }

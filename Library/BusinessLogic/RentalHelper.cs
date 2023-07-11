@@ -20,7 +20,7 @@ namespace LibraryManagement.BusinessLogic
 
         public string RentBook(IRental rental)
         {
-            IBook book = books.FirstOrDefault(b => b.Id == rental.Book.Id && b.Available);
+            IBook book = books.SingleOrDefault(b => b.Id == rental.Book.Id && b.Available);
             IUser user = users.Single(u => u.Id == rental.User.Id);
 
             if (book == null)
@@ -57,10 +57,10 @@ namespace LibraryManagement.BusinessLogic
         {
             List<IRental> rentals = this.rentals.Where(r => currentDate > r.ReturnDate && !r.BookReturned).ToList();
 
-            string message = "Overduerentals:" + System.Environment.NewLine;
+            string message = "Overduerentals:" + Environment.NewLine;
 
             foreach (var rental in rentals)
-                message = message + $"{rental.Book.Name}" + System.Environment.NewLine;
+                message = message + $"{rental.Book.Name}" + Environment.NewLine;
 
             return message;
         }

@@ -15,21 +15,21 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetBook(string name)
         {
-            IBook book = this.books.ToList().Find(b => b.Name.ToLower().Contains(name.ToLower()));
+            IBook book = this.books.FirstOrDefault(b => b.Name.ToLower().Contains(name.ToLower()));
 
             return ReturnMessage(book);
         }
 
         public string GetBookById(int Id)
         {
-            IBook book = this.books.ToList().Find(b => b.Id == Id);
+            IBook book = this.books.SingleOrDefault(b => b.Id == Id);
 
             return ReturnMessage(book);
         }
 
         public string GetBookByISBN(long ISBN)
         {
-            IBook book = this.books.ToList().Find(b => b.ISBN == ISBN);
+            IBook book = this.books.FirstOrDefault(b => b.ISBN == ISBN);
 
             return ReturnMessage(book);
         }
@@ -44,8 +44,8 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetNumberOfBooks(long ISBN)
         {
-            int allBooks = this.books.ToList().Where(b => b.ISBN == ISBN).Count();
-            int availableBooks = this.books.ToList().Where(b => b.ISBN == ISBN && b.Available).Count();
+            int allBooks = this.books.Where(b => b.ISBN == ISBN).Count();
+            int availableBooks = this.books.Where(b => b.ISBN == ISBN && b.Available).Count();
 
             return $"We have {allBooks} copies of which {availableBooks} are available";
         }
