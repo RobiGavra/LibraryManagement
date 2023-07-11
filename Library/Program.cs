@@ -11,7 +11,7 @@ namespace Library
     {
         static void Main(string[] args)
         {
-            DbMock data = new DbMock();
+            IDbMock data = new DbMock();
             IUserHelper userHelper = new UserHelper(data.Users);
             IBookHelper bookHelper = new BookHelper(data.Books);
             IRentalHelper rentalHelper = new RentalHelper(data.Users, data.Books, data.Rentals);

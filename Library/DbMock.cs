@@ -1,15 +1,18 @@
-﻿using LibraryManagement.Interfaces;
+﻿using Library.Interfaces;
+using LibraryManagement.Interfaces;
 using LibraryManagement.Models;
 using System;
 using System.Linq;
 
 namespace LibraryManagement
 {
-    public class DbMock
+    public class DbMock : IDbMock
     {
-        public IUser[] Users;
-        public IBook[] Books;
-        public IRental[] Rentals;
+        public IUser[] Users { get; set; }
+
+        public IBook[] Books { get; set; }
+
+        public IRental[] Rentals { get; set; }
 
         public DbMock()
         {
