@@ -10,7 +10,7 @@ namespace LibraryTest
     public class UserHelperTests
     {
         [TestMethod]
-        public void GetUser()
+        public void GetUser_GetbyName_GetbyId_SuccessAndFailureFlow_ReturnsCorrespondentMessages()
         {
             IUserHelper userHelper = new UserHelper(DataMock.MockUsers());
 
@@ -32,7 +32,7 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void AddUser()
+        public void AddUser_CreateNewUser_CheckIfUserCreated_ReturnsSuccessMessage()
         {
             IUserHelper userHelper = new UserHelper(DataMock.MockUsers());
 
@@ -48,7 +48,7 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void RemoveUser()
+        public void RemoveUser_SoftDelete_CheckIfUserDeleted_ReturnsSuccessMessage()
         {
             IUserHelper userHelper = new UserHelper(DataMock.MockUsers());
 

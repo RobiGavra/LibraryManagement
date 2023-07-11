@@ -54,7 +54,7 @@ namespace LibraryManagement.BusinessLogic
             return $"You need to pay {rental.GetFullPrice(currentDate)}, of which the penalties are {rental.GetPenalty(currentDate)}";
         }
 
-        public string GetOverduerentals(DateTime currentDate)
+        public string GetOverdueRentals(DateTime currentDate)
         {
             List<IRental> rentals = this.rentals.Where(r => currentDate > r.ReturnDate && !r.BookReturned).ToList();
 

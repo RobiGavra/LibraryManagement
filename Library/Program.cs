@@ -21,7 +21,7 @@ namespace Library
             Console.WriteLine(userHelper.AddUser(newUser));
             Console.WriteLine(userHelper.GetUser("Marian Petrescu"));
             Console.WriteLine(bookHelper.GetDistinctBooks());
-            Console.WriteLine(rentalHelper.GetOverduerentals(new DateTime(2023, 10, 20)));
+            Console.WriteLine(rentalHelper.GetOverdueRentals(new DateTime(2023, 10, 20)));
         }
     }
 }

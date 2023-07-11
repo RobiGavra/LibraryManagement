@@ -12,7 +12,7 @@ namespace LibraryTest
     public class RentalHelperTests
     {
         [TestMethod]
-        public void Rent()
+        public void Rent_RentUnavailableBook_RentAvailableBook_SuccessAndFailureFlow_ReturnsCorrespondentMessages()
         {
             IRentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), DataMock.MockBooks(), DataMock.MockRentals());
 
@@ -35,7 +35,7 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void GetPrice()
+        public void GetPrice_GetRentalPrice_CalculatesPenalty_ReturnsErrorMessageWhenBookAndRentalNotFound_ReturnsPriceForExistingItem()
         {
             IRentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), DataMock.MockBooks(), DataMock.MockRentals());
             DateTime returnDate = new DateTime(2023, 03, 01).AddDays(14);
@@ -60,18 +60,18 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void GetOverduerentals()
+        public void GetOverdueRentals_FindAllOverdueRentals_ReturnsList()
         {
             IRentalHelper rentalHelper = new RentalHelper(DataMock.MockUsers(), DataMock.MockBooks(), DataMock.MockRentals());
 
-            string books = rentalHelper.GetOverduerentals(new DateTime(2023, 10, 20));
+            string books = rentalHelper.GetOverdueRentals(new DateTime(2023, 10, 20));
             string expected = "Overduerentals:" + Environment.NewLine + "Ursul pacalit de vulpe" + Environment.NewLine + "Ion" + Environment.NewLine;
 
             Assert.AreEqual(books, expected);
         }
 
         [TestMethod]
-        public void ReturnBook()
+        public void ReturnBook_CheckIfBookNotReturned_ReturnBook_CheckIfBookReturned_ReturnsSuccessMessage()
         {
             IBook[] books = DataMock.MockBooks();
             IRental[] rentals = DataMock.MockRentals();

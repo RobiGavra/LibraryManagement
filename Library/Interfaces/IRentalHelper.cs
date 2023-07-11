@@ -9,7 +9,7 @@ namespace Library.Interfaces
 
         public string GetPrice(int bookId, int userId, DateTime currentDate);
 
-        public string GetOverduerentals(DateTime currentDate);
+        public string GetOverdueRentals(DateTime currentDate);
 
         public string ReturnBook(int bookId, int userId);
     }

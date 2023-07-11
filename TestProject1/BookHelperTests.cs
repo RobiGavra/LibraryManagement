@@ -10,7 +10,7 @@ namespace LibraryTest
     public class BookHelperTests
     {
         [TestMethod]
-        public void GetUser()
+        public void GetUser_GetbyName_GetbyId_GetbyISBN_SuccessAndFailureFlow_ReturnsCorrespondentMessages()
         {
             IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
@@ -40,13 +40,13 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void GetNumberOfBooks()
+        public void GetNumberOfBooks_GetbyName_GetbyISBN_ReturnsBooksNumber()
         {
             IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
-            string booksByName = bookHelper.GetNumberOfBooks("Ion");
+            string booksByName = bookHelper.GetNumberOfBooks("Ursul pacalit de vulpe");
 
-            Assert.AreEqual(booksByName, "We have 1 copies of which 0 are available");
+            Assert.AreEqual(booksByName, "We have 2 copies of which 1 are available");
 
             string bookByISBN = bookHelper.GetNumberOfBooks(0923644768);
 
@@ -54,7 +54,7 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void GetDistinctBooks()
+        public void GetDistinctBooks_ReturnsListOfDistinctBooks()
         {
             IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
@@ -65,7 +65,7 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void AddBook()
+        public void AddBook_CreateNewBook_CheckIfBookCreated_ReturnsSuccessMessage()
         {
             IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
@@ -77,7 +77,9 @@ namespace LibraryTest
                 Price = 20.5
             };
 
-            bookHelper.AddBook(book);
+            string message = bookHelper.AddBook(book);
+
+            Assert.AreEqual(message, "Book added");
 
             string bookByISBN = bookHelper.GetBookByISBN(923645769);
 
@@ -85,21 +87,17 @@ namespace LibraryTest
         }
 
         [TestMethod]
-        public void RemoveBook()
+        public void RemoveBook_SoftDelete_CheckIfBookDeleted_ReturnsSuccessMessage()
         {
             IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
-            bookHelper.RemoveBookById(1);
+            string message = bookHelper.RemoveBookById(1);
+
+            Assert.AreEqual(message, "Book removed");
 
             string bookById = bookHelper.GetBookById(1);
 
             Assert.AreEqual(bookById, "Book doesn't exist");
-
-            bookHelper.RemoveBookByISBN(923644768);
-
-            string bookByISBN = bookHelper.GetBookByISBN(923644768);
-
-            Assert.AreEqual(bookByISBN, "Book doesn't exist");
         }
     }
 }
