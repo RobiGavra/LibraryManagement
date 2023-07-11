@@ -16,21 +16,21 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetBook(string name)
         {
-            IBook book = this.books.FirstOrDefault(b => b.Name.ToLower().Contains(name.ToLower()));
+            IBook book = this.books.FirstOrDefault(b => b.Name.ToLower().Contains(name.ToLower()) && !b.Removed);
 
             return ReturnMessage(book);
         }
 
         public string GetBookById(int Id)
         {
-            IBook book = this.books.SingleOrDefault(b => b.Id == Id);
+            IBook book = this.books.SingleOrDefault(b => b.Id == Id && !b.Removed);
 
             return ReturnMessage(book);
         }
 
         public string GetBookByISBN(long ISBN)
         {
-            IBook book = this.books.FirstOrDefault(b => b.ISBN == ISBN);
+            IBook book = this.books.FirstOrDefault(b => b.ISBN == ISBN && !b.Removed);
 
             return ReturnMessage(book);
         }
@@ -45,15 +45,15 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetNumberOfBooks(long ISBN)
         {
-            int allBooks = this.books.Where(b => b.ISBN == ISBN).Count();
-            int availableBooks = this.books.Where(b => b.ISBN == ISBN && b.Available).Count();
+            int allBooks = this.books.Where(b => b.ISBN == ISBN && !b.Removed).Count();
+            int availableBooks = this.books.Where(b => b.ISBN == ISBN && b.Available && !b.Removed).Count();
 
             return $"We have {allBooks} copies of which {availableBooks} are available";
         }
 
         public string GetDistinctBooks()
         {
-            List<IBook> books = this.books.GroupBy(x => x.ISBN).Select(group => group.First()).ToList();
+            List<IBook> books = this.books.Where(b => !b.Removed).GroupBy(x => x.ISBN).Select(group => group.First()).ToList();
 
             string message = "Books:" + System.Environment.NewLine;
 
@@ -78,18 +78,15 @@ namespace LibraryManagement.BusinessLogic
 
         public string RemoveBookById(int Id)
         {
-            List<IBook> books = this.books.ToList();
-            books.RemoveAll(x => x.Id == Id);
-
-            this.books = books.ToArray();
+            this.books.SingleOrDefault(b => b.Id == Id).Removed = true;
 
             return "Book removed";
         }
 
         public string RemoveBookByISBN(long ISBN)
         {
-            List<IBook> books = this.books.ToList();
-            books.RemoveAll(x => x.ISBN == ISBN);
+            List<IBook> books = this.books.Where(b => b.ISBN == ISBN).ToList();
+            books.ForEach(b => b.Removed = true);
 
             this.books = books.ToArray();
 

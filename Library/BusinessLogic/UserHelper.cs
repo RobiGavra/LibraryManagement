@@ -23,7 +23,7 @@ namespace LibraryManagement.BusinessLogic
 
         public string GetUser(int Id)
         {
-            IUser user = this.users.FirstOrDefault(u => u.Id == Id);
+            IUser user = this.users.SingleOrDefault(u => u.Id == Id && !u.Removed);
 
             return ReturnMessage(user);
         }
@@ -41,10 +41,7 @@ namespace LibraryManagement.BusinessLogic
 
         public string RemoveUser(int Id)
         {
-            List<IUser> users = this.users.ToList();
-            users.RemoveAll(x => x.Id == Id);
-
-            this.users = users.ToArray();
+            this.users.SingleOrDefault(u => u.Id == Id).Removed = true;
 
             return "User removed";
         }

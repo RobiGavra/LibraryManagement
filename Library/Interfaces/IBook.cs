@@ -13,5 +13,7 @@
         public double Price { get; set; }
 
         public bool Available { get; set; }
+
+        public bool Removed { get; set; }
     }
 }
