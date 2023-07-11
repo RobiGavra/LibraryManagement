@@ -1,4 +1,5 @@
-﻿using LibraryManagement.BusinessLogic;
+﻿using Library.Interfaces;
+using LibraryManagement.BusinessLogic;
 using LibraryManagement.Interfaces;
 using LibraryManagement.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +12,7 @@ namespace LibraryTest
         [TestMethod]
         public void GetUser()
         {
-            BookHelper bookHelper = new BookHelper(DataMock.MockBooks());
+            IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
             string bookByName = bookHelper.GetBook("Ionica");
 
@@ -41,7 +42,7 @@ namespace LibraryTest
         [TestMethod]
         public void GetNumberOfBooks()
         {
-            BookHelper bookHelper = new BookHelper(DataMock.MockBooks());
+            IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
             string booksByName = bookHelper.GetNumberOfBooks("Ion");
 
@@ -55,7 +56,7 @@ namespace LibraryTest
         [TestMethod]
         public void GetDistinctBooks()
         {
-            BookHelper bookHelper = new BookHelper(DataMock.MockBooks());
+            IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
             string books = bookHelper.GetDistinctBooks();
             string expected = "Books:" + System.Environment.NewLine + "Ursul pacalit de vulpe" + System.Environment.NewLine + "Ion" + System.Environment.NewLine;
@@ -66,7 +67,7 @@ namespace LibraryTest
         [TestMethod]
         public void AddBook()
         {
-            BookHelper bookHelper = new BookHelper(DataMock.MockBooks());
+            IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
             IBook book = new Book()
             {
@@ -86,7 +87,7 @@ namespace LibraryTest
         [TestMethod]
         public void RemoveBook()
         {
-            BookHelper bookHelper = new BookHelper(DataMock.MockBooks());
+            IBookHelper bookHelper = new BookHelper(DataMock.MockBooks());
 
             bookHelper.RemoveBookById(1);
 

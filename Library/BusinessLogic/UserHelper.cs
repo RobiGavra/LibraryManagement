@@ -1,10 +1,11 @@
-﻿using LibraryManagement.Interfaces;
+﻿using Library.Interfaces;
+using LibraryManagement.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace LibraryManagement.BusinessLogic
 {
-    public class UserHelper
+    public class UserHelper : IUserHelper
     {
         private IUser[] users;
 

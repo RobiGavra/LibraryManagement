@@ -1,4 +1,5 @@
-﻿using LibraryManagement;
+﻿using Library.Interfaces;
+using LibraryManagement;
 using LibraryManagement.BusinessLogic;
 using LibraryManagement.Interfaces;
 using LibraryManagement.Models;
@@ -11,9 +12,9 @@ namespace Library
         static void Main(string[] args)
         {
             DbMock data = new DbMock();
-            UserHelper userHelper = new UserHelper(data.Users);
-            BookHelper bookHelper = new BookHelper(data.Books);
-            RentalHelper rentalHelper = new RentalHelper(data.Users, data.Books, data.Rentals);
+            IUserHelper userHelper = new UserHelper(data.Users);
+            IBookHelper bookHelper = new BookHelper(data.Books);
+            IRentalHelper rentalHelper = new RentalHelper(data.Users, data.Books, data.Rentals);
 
             IUser newUser = new User() { FullName = "Marian Petrescu" };
 

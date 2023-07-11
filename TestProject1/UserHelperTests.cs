@@ -1,3 +1,4 @@
+using Library.Interfaces;
 using LibraryManagement.BusinessLogic;
 using LibraryManagement.Interfaces;
 using LibraryManagement.Models;
@@ -11,7 +12,7 @@ namespace LibraryTest
         [TestMethod]
         public void GetUser()
         {
-            UserHelper userHelper = new UserHelper(DataMock.MockUsers());
+            IUserHelper userHelper = new UserHelper(DataMock.MockUsers());
 
             string userByName = userHelper.GetUser("Victor");
 
@@ -33,7 +34,7 @@ namespace LibraryTest
         [TestMethod]
         public void AddUser()
         {
-            UserHelper userHelper = new UserHelper(DataMock.MockUsers());
+            IUserHelper userHelper = new UserHelper(DataMock.MockUsers());
 
             IUser newUser = new User() { FullName = "Marian Petrescu" };
 
@@ -49,7 +50,7 @@ namespace LibraryTest
         [TestMethod]
         public void RemoveUser()
         {
-            UserHelper userHelper = new UserHelper(DataMock.MockUsers());
+            IUserHelper userHelper = new UserHelper(DataMock.MockUsers());
 
             string removeMessage = userHelper.RemoveUser(1);
 

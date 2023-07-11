@@ -1,11 +1,12 @@
-﻿using LibraryManagement.Interfaces;
+﻿using Library.Interfaces;
+using LibraryManagement.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace LibraryManagement.BusinessLogic
 {
-    public class RentalHelper
+    public class RentalHelper : IRentalHelper
     {
         private IUser[] users;
         private IBook[] books;
